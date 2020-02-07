@@ -7,16 +7,16 @@ import skimage.measure as sk
 import torch.nn as nn
 
 def save_plot_voxels(voxels, path, iteration):
-    voxels = voxels.__ge__(0.5)
-    #fig = plt.figure(figsize=(32, 16))
+    voxels = voxels.__ge__(0.05)
+    fig = plt.figure(figsize=(32, 16))
     gs = gridspec.GridSpec(2, 5)
     gs.update(wspace=0.05, hspace=0.05)
     for i, sample in enumerate(voxels):
         x = sample.nonzero()[:, 0]
-        y = sample.nonzero()[:, 1]
-        z = sample.nonzero()[:, 2]
+        y = sample.nonzero()[:, 2]
+        z = sample.nonzero()[:, 1]
         ax = plt.subplot(gs[i], projection='3d')
-        ax.scatter(x, y, z, zdir='z', c='red')
+        ax.scatter(x, y, z, zdir='z', c='red', s=2.5)
         ax.set_xticklabels([])
         ax.set_yticklabels([])
         ax.set_aspect('equal')
